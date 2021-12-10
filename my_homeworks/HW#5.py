@@ -37,7 +37,5 @@ class Calc:
 calc = Calc(1, 2, 3)
 print(Calc.add_nums(1, 2, 3))
 
-
-
-
+#4
 
