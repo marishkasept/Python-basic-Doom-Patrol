@@ -25,7 +25,7 @@ class Predator(Animal):
 
     def eat(self, forest):
         print(f"now {self.name}'s power: {self.current_power} points")
-        prey = choice(forest._identificators)
+        prey = choice(list(forest.animals.keys()))
         if self.id == prey:
             print(f"{self.name} chose himself, it's left without a dinner")
             print(f"now {self.name}'s power: {self.current_power} points")
@@ -92,33 +92,31 @@ class Forest:
 
     def __init__(self):
         self.animals = dict()
-        self.category = None
-        self._identificators = list()
+        self.number = 1
+        self.start = None
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        i = choice(self._identificators)
-        return self.animals[i]
+        if self.number > 0:
+            self.start = choice(list(self.animals.keys()))
+            self.number -= 1
+            return self.animals[self.start]
+        else:
+            raise StopIteration
 
     def add_animal(self, animal):
-        self._identificators.append(animal.id)
         self.animals[animal.id] = animal
 
     def remove_animal(self, animal):
-        for i in range(len(self._identificators)):
-            if animal.id == self._identificators[i]:
-                del self.animals[animal.id]
-                del self._identificators[i]
-                break
-            else:
-                del self.animals[animal.id]
+        del self.animals[animal.id]
 
     def any_predator_left(self):
-        for creature in self.animals.keys():
+        for creature in list(self.animals.keys()):
             if isinstance(self.animals[creature], Predator):
                 return True
+        print("no more predators in the forest...")
         return False
 
 
@@ -139,17 +137,14 @@ def animal_generator(value):
 
 
 if __name__ == "__main__":
-    nature = animal_generator(10)
+    nature = animal_generator(30)
 
     forest = Forest()
     for i in range(10):
         animal = next(nature)
         forest.add_animal(animal)
 
-    while True:
-        if not forest.any_predator_left():
-            print("no predators left in the forest")
-            break
+    while forest.any_predator_left():
         for animal in forest:
-            animal.eat(forest)
-        time.sleep(100)
+            animal.eat(forest=forest)
+        forest.number = 1
