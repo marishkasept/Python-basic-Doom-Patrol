@@ -148,3 +148,4 @@ if __name__ == "__main__":
         for animal in forest:
             animal.eat(forest=forest)
         forest.number = 1
+
