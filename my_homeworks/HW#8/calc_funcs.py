@@ -1,4 +1,3 @@
-
 def calc_add(first, second):
     result = first + second
     with open("result.txt", "w") as file:
