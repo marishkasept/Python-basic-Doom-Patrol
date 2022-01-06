@@ -1,11 +1,11 @@
-def suma(x, y):
+def sum(x, y):
     return x + y
 
-def dif(x, y):
+def sub(x, y):
     return x - y
 
 def div(x, y):
     return x / y
 
-def multiple(x, y):
-    return x *
+def mul(x, y):
+    return x * y

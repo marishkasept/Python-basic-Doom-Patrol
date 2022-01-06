@@ -9,5 +9,4 @@ def range_list(first_number, second_number):
     range_list = []
     for i in range(first_number, second_number):
         range_list.append(i)
-
     return range_list
