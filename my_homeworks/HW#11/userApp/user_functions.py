@@ -69,7 +69,7 @@ def search_by(search_str, what_to_search):
         print("You want to search by field which not in user fields!!!")
 
 
-def a():
+def update_user():
     file = open(Config.PATH_TO_USERS_FILE, 'r')
     users = json.loads(file.read())
     file.close()
@@ -82,6 +82,5 @@ def a():
             user['first_name'] = first_name
             user['last_name'] = last_name
             user['Email'] = email
-
     with open(Config.PATH_TO_USERS_FILE, 'w') as file:
         file.write(json.dumps(users))
